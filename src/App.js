@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { Timer } from './Component/Timer';
+import { useState } from 'react';
 
 function App() {
+
+  const [initialTime, setInitialTime] = useState("");
+  const [finalTime, setFinalTime] = useState("");
+  const [start, setStart] = useState(false);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Timer</h1>
+      <input value={initialTime} onChange={(e) => setInitialTime(Number(e.currentTarget.value))} type="number" placeholder="Initial Time" value={initialTime} />
+      <input value={finalTime} onChange={(e) => setFinalTime(Number(e.currentTarget.value))} type="number" placeholder="Final Time" value={finalTime} />
+      <button onClick={() => setStart( !start )}  >Start Timer</button>
+      {
+        start && <Timer initialTime={initialTime} finalTime={finalTime} setStart={setStart} />
+      }
     </div>
   );
 }
